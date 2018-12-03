@@ -6,4 +6,5 @@
   <version>1.0-SNAPSHOT</version>
   <name>Archetype - accelerate-aqe-archetype</name>
   <url>http://maven.apache.org</url>
+    <packaging>jar</packaging>
 </project>

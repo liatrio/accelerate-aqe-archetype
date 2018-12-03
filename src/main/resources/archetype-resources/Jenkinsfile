@@ -1,0 +1,51 @@
+library 'sharedlibs'
+
+nativeMavenPipeline(
+    build : [
+        buildParams: 'clean install'
+    ],
+    codeQualityScan :[
+        notificationVerbose: true
+    ],
+    deploy: [
+        skip: true,
+        deployEnv: 'rnd',
+        deployPlaybookVersion: '2.2.2',
+        component:[
+            name: '${artifactId}',
+            type: 'springboot',
+            environments:[
+                rnd:[
+                    level: "rnd",
+                    hosts:[
+                        '${devHostName}'
+                    ]
+                ]
+            ],
+            artifacts: [
+                 [
+                    module: '${artifactId}',
+                    group: '${groupId}',
+                    version: 'latest',
+                    ext: 'jar'
+                ]
+            ]
+        ]
+    ],
+    interactiveSecurityScan : [
+        skip: true,
+        script: 'audit_pipeline_script.w3af'
+    ],
+    staticSecurityScan: [ 
+        skip: true 
+    ],
+    smokeTest: [
+        skip: true
+    ],
+    functionalTest: [ 
+        skip: true
+    ],
+    performanceTest : [
+        skip: true
+    ]
+)
